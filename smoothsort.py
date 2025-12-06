@@ -1,7 +1,7 @@
 
 from typing import List, Any
 
-# --- NÚMEROS DE LEONARDO ---
+# --- NÚMEROS DE LEONARDO (FIBONACCI)---
 
 def leonardo(k):
     """
@@ -11,13 +11,13 @@ def leonardo(k):
     """
     if k < 0:
         return 0
-    if k == 0 or k == 1:
+    if k == 0 or k == 1: 
         return 1
     
     # Implementação iterativa para melhor desempenho
-    a, b = 1, 1
+    a, b = 1, 1   #a representa L(k-2) e b representa L(k-1)
     for _ in range(2, k + 1):
-        a, b = b, a + b + 1
+        a, b = b, a + b + 1 #que é exatamente a fórmula onde o 'a + b + 1' => L(k) = L(k−1) + L(k−2) + 1
         
     return b
 
@@ -36,7 +36,7 @@ def _sift(arr: List[Any], i: int, head: int, p: int, is_greater):
     """
     # p é o índice do número de Leonardo L(k) que define o tamanho da árvore.
     k = 0
-    while leonardo(k) < head - i:
+    while leonardo(k) < head - i: #head - i ==> tamanho (em elementos) da árvore que começa em i
         k += 1
 
     while k > 1:
@@ -54,7 +54,7 @@ def _sift(arr: List[Any], i: int, head: int, p: int, is_greater):
         rc_idx = i - left_child_size - right_child_size
         
         # O maior valor entre os filhos (lc_idx ou rc_idx)
-        max_child_idx = lc_idx
+        max_child_idx = lc_idx #assumindo que o maior filho é o esquerdo
         
         # Verifica se o filho da direita existe e é maior que o da esquerda
         if rc_idx >= head and is_greater(arr[rc_idx], arr[lc_idx]):

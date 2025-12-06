@@ -138,27 +138,39 @@ if __name__ == "__main__":
         os.makedirs("graficos")
 
     # Tamanhos de entrada a serem testados (REQUISITO 2.2)
-    TAMANHOS_TESTE = [100, 1_000, 10_000, 50_000, 100_000] 
+    TAMANHOS_TESTE = [100, 1_000, 10_000, 50_000, 100_000, 200_000] 
     
-    # --- CENÁRIO 1: INTEIROS ALEATÓRIOS (CASO MÉDIO) ---
-    tempos_aleatorios_int = medir_desempenho(smoothsort, TAMANHOS_TESTE, "int", "aleatório")
-    gerar_grafico(
-        TAMANHOS_TESTE, 
-        tempos_aleatorios_int, 
-        "Smoothsort - Desempenho em Inteiros Aleatórios (O(n log n))",
-        "smoothsort_inteiros_aleatorios.png"
-    )
-    
-    # --- CENÁRIO 2: MELHOR CASO (JÁ ORDENADO) ---
+    # --- CENÁRIO 1: MELHOR CASO (JÁ ORDENADO) ---
     tempos_ordenados_int = medir_desempenho(smoothsort, TAMANHOS_TESTE, "int", "ordenado")
     gerar_grafico(
         TAMANHOS_TESTE, 
         tempos_ordenados_int, 
-        "Smoothsort - Desempenho em Inteiros Já Ordenados (Melhor Caso O(n))",
-        "smoothsort_melhor_caso_ordenado.png"
+        "Smoothsort - Inteiros Já Ordenados (Melhor Caso O(n))",
+        "smoothsort_inteiros_melhor_caso.png"
     )
     
-    # --- CENÁRIO 3: TIPOS DE DADOS - STRINGS ---
+    # --- CENÁRIO 2: INTEIROS ALEATÓRIOS (CASO MÉDIO) ---
+    tempos_aleatorios_int = medir_desempenho(smoothsort, TAMANHOS_TESTE, "int", "aleatório")
+    gerar_grafico(
+        TAMANHOS_TESTE, 
+        tempos_aleatorios_int, 
+        "Smoothsort - Inteiros Aleatórios (Caso Médio O(n log n))",
+        "smoothsort_inteiros_aleatorios.png"
+    )
+
+    # 3. PIOR CASO (Inteiros Inversamente Ordenados) - Espera-se O(n log n)
+    # Chama a função 'medir_desempenho' com o parâmetro cenario="inverso"
+    tempos_inversos_int = medir_desempenho(smoothsort, TAMANHOS_TESTE, "int", "inverso") 
+    
+    # Gera o gráfico específico para o pior caso
+    gerar_grafico(
+        TAMANHOS_TESTE, 
+        tempos_inversos_int, 
+        "Smoothsort - Inteiros Inversamente Ordenados (Pior Caso O(n log n))",
+        "smoothsort_inteiros_pior_caso.png" # NOVO NOME DE ARQUIVO
+    )
+    
+    # --- CENÁRIO 4: TIPOS DE DADOS - STRINGS ---
     tempos_strings = medir_desempenho(smoothsort, TAMANHOS_TESTE, "str", "aleatório")
     gerar_grafico(
         TAMANHOS_TESTE, 
@@ -167,7 +179,7 @@ if __name__ == "__main__":
         "smoothsort_strings_aleatorias.png"
     )
 
-    # --- CENÁRIO 4: TIPOS DE DADOS - OBJETOS ---
+    # --- CENÁRIO 5: TIPOS DE DADOS - OBJETOS ---
     tempos_objetos = medir_desempenho(smoothsort, TAMANHOS_TESTE, "obj", "aleatório")
     gerar_grafico(
         TAMANHOS_TESTE, 
