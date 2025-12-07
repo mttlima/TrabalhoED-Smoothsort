@@ -87,7 +87,7 @@ def medir_desempenho(algoritmo_ord, tamanhos: List[int], tipo_dado: str, cenario
         start_time = time.time()
         
         # Chamada do algoritmo: Testando a ordenação crescente (padrão)
-        algoritmo_ord(data_copy, reverse=False) 
+        algoritmo_ord(data_copy, reverse=(cenario == "decrescente")) #se o cenário for descrescente usar reverse TRUE, caso contrário reverse=FALSE
         
         end_time = time.time()
         
@@ -148,7 +148,7 @@ if __name__ == "__main__":
         "Smoothsort - Inteiros Já Ordenados (Melhor Caso O(n))",
         "smoothsort_inteiros_melhor_caso.png"
     )
-    
+
     # --- CENÁRIO 2: INTEIROS ALEATÓRIOS (CASO MÉDIO) ---
     tempos_aleatorios_int = medir_desempenho(smoothsort, TAMANHOS_TESTE, "int", "aleatório")
     gerar_grafico(
@@ -187,5 +187,14 @@ if __name__ == "__main__":
         "Smoothsort - Desempenho em Objetos (Chave: Idade)",
         "smoothsort_objetos_aleatorios.png"
     )
+
+    # --- CENÁRIO 6: ORDENAR DECRESCENTE ---
+    tempos_decrescente = medir_desempenho(smoothsort, TAMANHOS_TESTE, "int", "decrescente")
+    gerar_grafico(
+        TAMANHOS_TESTE,
+        tempos_decrescente,
+        "Smoothsort - Inteiros (Ordenação Decrescente)",
+        "smoothsort_inteiros_decrescente.png"
+)
 
     print("\n✅ Todos os testes de desempenho foram concluídos e os gráficos foram salvos na pasta 'graficos/'.")
